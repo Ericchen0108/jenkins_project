@@ -1,0 +1,77 @@
+version: '3.8'
+
+services:
+  selenium-tests:
+    build: .
+    volumes:
+      - ./reports:/app/reports
+      - ./config:/app/config
+    environment:
+      - HEADLESS=true
+      - BROWSER=chrome
+      - SCREENSHOT_ON_FAILURE=true
+      - PARALLEL_TESTS=1
+    command: pytest --html=reports/report.html --self-contained-html -v
+    
+  selenium-tests-chrome:
+    build: .
+    volumes:
+      - ./reports:/app/reports
+    environment:
+      - HEADLESS=true
+      - BROWSER=chrome
+      - SCREENSHOT_ON_FAILURE=true
+    command: pytest -m "smoke" --html=reports/chrome_report.html --self-contained-html -v
+
+  selenium-tests-firefox:
+    build: .
+    volumes:
+      - ./reports:/app/reports
+    environment:
+      - HEADLESS=true
+      - BROWSER=firefox
+      - SCREENSHOT_ON_FAILURE=true
+    command: pytest -m "smoke" --html=reports/firefox_report.html --self-contained-html -v
+
+  selenium-grid-hub:
+    image: selenium/hub:4.15.0
+    ports:
+      - "4444:4444"
+    environment:
+      - GRID_MAX_SESSION=16
+      - GRID_BROWSER_TIMEOUT=300
+      - GRID_TIMEOUT=300
+
+  selenium-chrome:
+    image: selenium/node-chrome:4.15.0
+    shm_size: 2gb
+    depends_on:
+      - selenium-grid-hub
+    environment:
+      - HUB_HOST=selenium-grid-hub
+      - NODE_MAX_INSTANCES=2
+      - NODE_MAX_SESSION=2
+
+  selenium-firefox:
+    image: selenium/node-firefox:4.15.0
+    shm_size: 2gb
+    depends_on:
+      - selenium-grid-hub
+    environment:
+      - HUB_HOST=selenium-grid-hub
+      - NODE_MAX_INSTANCES=2
+      - NODE_MAX_SESSION=2
+
+  selenium-tests-grid:
+    build: .
+    depends_on:
+      - selenium-grid-hub
+      - selenium-chrome
+      - selenium-firefox
+    volumes:
+      - ./reports:/app/reports
+    environment:
+      - SELENIUM_GRID_URL=http://selenium-grid-hub:4444
+      - SCREENSHOT_ON_FAILURE=true
+      - PARALLEL_TESTS=4
+    command: pytest --html=reports/grid_report.html --self-contained-html -v -n 4

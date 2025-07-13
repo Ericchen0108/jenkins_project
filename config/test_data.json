@@ -1,0 +1,84 @@
+{
+  "search_terms": {
+    "valid": [
+      "Python programming",
+      "Selenium automation",
+      "Web development tutorial",
+      "Machine learning basics",
+      "JavaScript frameworks",
+      "Docker containers",
+      "CI/CD pipeline",
+      "Test automation",
+      "React tutorial",
+      "Node.js guide"
+    ],
+    "special_characters": [
+      "C++ programming",
+      "React.js",
+      "API testing @2023",
+      "music #trending",
+      "Vue.js tutorial",
+      "ASP.NET core"
+    ],
+    "invalid": [
+      "",
+      "   ",
+      "xyzxyzxyznonexistentcontentxyzxyz123456789",
+      "!@#$%^&*()",
+      "    invalid    spaces    "
+    ]
+  },
+  "video_categories": [
+    "Education",
+    "Technology",
+    "Music",
+    "Entertainment",
+    "News",
+    "Sports",
+    "Gaming",
+    "Science",
+    "Documentary",
+    "Tutorial"
+  ],
+  "browser_resolutions": [
+    {"width": 1920, "height": 1080, "name": "Full HD"},
+    {"width": 1366, "height": 768, "name": "Laptop"},
+    {"width": 1024, "height": 768, "name": "Tablet Landscape"},
+    {"width": 768, "height": 1024, "name": "Tablet Portrait"},
+    {"width": 1440, "height": 900, "name": "MacBook Air"}
+  ],
+  "test_timeouts": {
+    "element_wait": 10,
+    "page_load": 30,
+    "video_load": 15,
+    "search_results": 10,
+    "screenshot_delay": 2
+  },
+  "youtube_urls": {
+    "base": "https://www.youtube.com",
+    "trending": "https://www.youtube.com/feed/trending",
+    "search_base": "https://www.youtube.com/results?search_query=",
+    "watch_base": "https://www.youtube.com/watch?v="
+  },
+  "expected_elements": {
+    "homepage": [
+      "search_box",
+      "youtube_logo",
+      "video_thumbnails",
+      "navigation_menu"
+    ],
+    "search_page": [
+      "search_results",
+      "filter_button",
+      "sort_options",
+      "video_titles"
+    ],
+    "video_page": [
+      "video_player",
+      "video_title",
+      "channel_name",
+      "like_button",
+      "share_button"
+    ]
+  }
+}
