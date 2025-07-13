@@ -2,6 +2,8 @@
 
 A comprehensive test automation framework for YouTube functionality using Selenium WebDriver, Python, and Jenkins CI/CD pipeline.
 
+**Last Updated**: Auto-build test - $(date)
+
 ## 🚀 Features
 
 - **Page Object Model**: Maintainable test architecture
